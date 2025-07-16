@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Ecology Research Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 30px 20px;
+            background: rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .nav-tab {
+            margin: 0;
+        }
+
+        .nav-tab button {
+            width: 100%;
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-tab button:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #fff;
+        }
+
+        .nav-tab button.active {
+            background: rgba(255,255,255,0.15);
+            border-left-color: #fff;
+            font-weight: 600;
+        }
+
+        .nav-tab button::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: currentColor;
+            border-radius: 50%;
+            margin-right: 12px;
+            opacity: 0.7;
+        }
+
+        .nav-tab button.active::before {
+            opacity: 1;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-header h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .content-placeholder {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .content-placeholder h3 {
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .content-placeholder p {
+            color: #adb5bd;
+            font-size: 14px;
+        }
+
+        .info-card {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .info-card p {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        /* Utility Classes */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+        }
+
+        .text-muted {
+            color: #6c757d;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .mt-4 {
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>Lab Documentation</h1>
+                <p>Research Hub & Resources</p>
+            </div>
+            <ul class="nav-tabs">
+                <li class="nav-tab">
+                    <button class="tab-btn active" data-tab="overview">Overview</button>
+                </li>
+                <li class="nav-tab">
+                    <button class="tab-btn" data-tab="protocols">Protocols</button>
+                </li>
+                <li class="nav-tab">
+                    <button class="tab-btn" data-tab="equipment">Equipment</button>
+                </li>
+                <li class="nav-tab">
+                    <button class="tab-btn" data-tab="resources">Resources</button>
+                </li>
+                <li class="nav-tab">
+                    <button class="tab-btn" data-tab="publications">Publications</button>
+                </li>
+                <li class="nav-tab">
+                    <button class="tab-btn" data-tab="contacts">Contacts</button>
+                </li>
+                <li class="nav-tab">
+                    <button class="tab-btn" data-tab="calendar">Calendar</button>
+                </li>
+                <li class="nav-tab">
+                    <button class="tab-btn" data-tab="safety">Safety</button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Overview Tab -->
+            <section id="overview" class="content-section active">
+                <div class="section-header">
+                    <h2>Lab Overview</h2>
+                    <p>Welcome to the Global Ecology Research Lab</p>
+                </div>
+                <div class="info-card">
+                    <h3>Getting Started</h3>
+                    <p>INSERT INFORMATION HERE</p>
+                </div>
+                <div class="content-placeholder">
+                    <h3>Add Your Lab Information</h3>
+                    <p>Replace this placeholder with your lab's mission, current projects, and important announcements.</p>
+                </div>
+            </section>
+
+            <!-- Protocols Tab -->
+            <section id="protocols" class="content-section">
+                <div class="section-header">
+                    <h2>Lab Protocols</h2>
+                    <p>Standard operating procedures and experimental protocols</p>
+                </div>
+                <div class="content-placeholder">
+                    <h3>Protocol Documentation</h3>
+                    <p>Add your lab's standard protocols, procedures, and experimental methods here.</p>
+                </div>
+            </section>
+
+            <!-- Equipment Tab -->
+            <section id="equipment" class="content-section">
+                <div class="section-header">
+                    <h2>Equipment & Instruments</h2>
+                    <p>Lab equipment, maintenance schedules, and usage guidelines</p>
+                </div>
+                <div class="content-placeholder">
+                    <h3>Equipment Information</h3>
+                    <p>Document your lab equipment, maintenance schedules, booking systems, and usage instructions.</p>
+                </div>
+            </section>
+
+            <!-- Resources Tab -->
+            <section id="resources" class="content-section">
+                <div class="section-header">
+                    <h2>Resources & Links</h2>
+                    <p>Useful resources, databases, and external links</p>
+                </div>
+                <div class="content-placeholder">
+                    <h3>Research Resources</h3>
+                    <p>Add links to databases, software tools, reference materials, and other useful resources.</p>
+                </div>
+            </section>
+
+            <!-- Publications Tab -->
+            <section id="publications" class="content-section">
+                <div class="section-header">
+                    <h2>Publications</h2>
+                    <p>Lab publications, presentations, and research outputs</p>
+                </div>
+                <div class="content-placeholder">
+                    <h3>Research Publications</h3>
+                    <p>List your lab's publications, conference presentations, and other research outputs.</p>
+                </div>
+            </section>
+
+            <!-- Contacts Tab -->
+            <section id="contacts" class="content-section">
+                <div class="section-header">
+                    <h2>Contacts</h2>
+                    <p>Lab members, collaborators, and important contacts</p>
+                </div>
+                <div class="content-placeholder">
+                    <h3>Contact Information</h3>
+                    <p>Add contact details for lab members, collaborators, and important institutional contacts.</p>
+                </div>
+            </section>
+
+            <!-- Calendar Tab -->
+            <section id="calendar" class="content-section">
+                <div class="section-header">
+                    <h2>Calendar & Events</h2>
+                    <p>Lab meetings, conferences, and important dates</p>
+                </div>
+                <div class="content-placeholder">
+                    <h3>Lab Calendar</h3>
+                    <p>Add information about lab meetings, conferences, deadlines, and other important events.</p>
+                </div>
+            </section>
+
+            <!-- Safety Tab -->
+            <section id="safety" class="content-section">
+                <div class="section-header">
+                    <h2>Safety Information</h2>
+                    <p>Safety protocols, emergency procedures, and compliance</p>
+                </div>
+                <div class="content-placeholder">
+                    <h3>Safety Guidelines</h3>
+                    <p>Document safety protocols, emergency procedures, and compliance requirements.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and sections
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                contentSections.forEach(section => section.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding section
+                button.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Initialize with overview tab active
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('[data-tab="overview"]').classList.add('active');
+            document.getElementById('overview').classList.add('active');
+        });
+    </script>
+</body>
+</html>
