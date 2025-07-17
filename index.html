@@ -532,6 +532,14 @@
             document.body.style.overflow = 'hidden';
         }
 
+      // PowerPoint viewer function
+        function showPosterPPT(posterName) {
+            // PowerPoint files can't be displayed inline like PDFs
+            // Instead, open in a new tab for download
+           const pptUrl = `Posters/TWS 2025/${posterName}.pptx`;
+           window.open(pptUrl, '_blank');
+        }
+
         function closeProposal() {
             const proposalViewer = document.getElementById('proposal-viewer');
             proposalViewer.style.display = 'none';
