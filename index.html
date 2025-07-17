@@ -243,9 +243,10 @@
         /* Proposal viewer styles */
         .proposal-buttons {
             display: flex;
+            flex-direction: column;
             gap: 15px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
+            align-items: flex-start;
         }
 
         .proposal-btn {
@@ -405,6 +406,20 @@
                         <embed id="proposal-image" src="" type="application/pdf" style="width: 100%; height: 90vh; border-radius: 8px;">
                     </div>
                 </div>
+
+                <!-- Poster Presentations Section -->
+                <div class="info-card">
+                    <h3>Poster Presentations</h3>
+                    <p>Click on a poster title to view:</p>
+                    
+                    <div class="proposal-buttons">
+                        <button class="proposal-btn" onclick="showPoster('Lilkendey_et_al_Pollinators_FLTWS_April 2025')">Thomas Lilkendey - TWS 2025 - PDF</button>
+                        <button class="proposal-btn" onclick="showPosterPPT('Lilkendey_et_al_Pollinators_FLTWS_April 2025')">Thomas Lilkendey - TWS 2025 - PPT</button>
+                        <button class="proposal-btn" onclick="showPoster('Levi_Hoskins_avian biodiversity during migration and overwintering in urban greenspaces_FLTWS_April 2025')">Levi Hoskins - TWS 2025 - PDF</button>
+                        <button class="proposal-btn" onclick="showPoster('Gallivan_et_al_iNat vs EDDMapS comparison - FLTWS - April 2025')">Lee Gallivan - TWS 2025 - PDF</button>
+                        <button class="proposal-btn" onclick="showPoster('Fussell_et_al_wading bird abundance comparison *FLTWS * April 2025')">Analise Fussell - TWS 2025 - PDF</button>
+                    </div>
+                </div>
                 
                 <div class="content-placeholder">
                     <h3>Research Resources</h3>
@@ -494,6 +509,21 @@
             
             // Set the PDF source based on student name
             proposalImage.src = `Previously Finished Proposals/${studentName}.pdf`;
+            
+            // Show the viewer
+            proposalViewer.style.display = 'block';
+            
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Poster viewer function
+        function showPoster(posterName) {
+            const proposalViewer = document.getElementById('proposal-viewer');
+            const proposalImage = document.getElementById('proposal-image');
+            
+            // Set the PDF source for posters in Posters/TWS 2025/ folder
+            proposalImage.src = `Posters/TWS 2025/${posterName}.pdf`;
             
             // Show the viewer
             proposalViewer.style.display = 'block';
