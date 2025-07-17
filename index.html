@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Ecology Research Lab</title>
+    <title>Lab Documentation Hub</title>
     <style>
         * {
             margin: 0;
@@ -239,6 +239,67 @@
         .mt-4 {
             margin-top: 1.5rem;
         }
+
+        /* Proposal viewer styles */
+        .proposal-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .proposal-btn {
+            background: #4a7c59;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .proposal-btn:hover {
+            background: #2d5016;
+        }
+
+        .proposal-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close-btn:hover {
+            color: #ccc;
+        }
+
+        .proposal-viewer img {
+            display: block;
+            max-width: 100%;
+            max-height: 90vh;
+            margin: 60px auto 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -247,7 +308,7 @@
         <nav class="sidebar">
             <div class="sidebar-header">
                 <div class="logo-container">
-                 <img src="logo.png" alt="Global Ecology Research Group Logo">
+                    <img src="logo.png" alt="Global Ecology Research Group Logo">
                 </div>
                 <h1>Global Ecology Research Group</h1>
                 <p>Documentation Hub</p>
@@ -290,11 +351,11 @@
                 </div>
                 <div class="info-card">
                     <h3>Getting Started</h3>
-                    <p>INSERT LAB INFO HERE.</p>
+                    <p>This is your lab's central documentation hub. Use the tabs on the left to navigate between different sections. Each section can be customized with your lab's specific information, protocols, and resources.</p>
                 </div>
                 <div class="content-placeholder">
-                    <h3>Lab Information</h3>
-                    <p>INSERT LAB MISSION HERE.</p>
+                    <h3>Add Your Lab Information</h3>
+                    <p>Replace this placeholder with your lab's mission, current projects, and important announcements.</p>
                 </div>
             </section>
 
@@ -306,7 +367,7 @@
                 </div>
                 <div class="content-placeholder">
                     <h3>Protocol Documentation</h3>
-                    <p>INSERT LAB PROTOCOLS AND METHODS HERE</p>
+                    <p>Add your lab's standard protocols, procedures, and experimental methods here.</p>
                 </div>
             </section>
 
@@ -314,7 +375,7 @@
             <section id="equipment" class="content-section">
                 <div class="section-header">
                     <h2>Equipment & Instruments</h2>
-                    <p>INSERT LAB EQUIPMENT AND GUIDLINES HERE</p>
+                    <p>Lab equipment, maintenance schedules, and usage guidelines</p>
                 </div>
                 <div class="content-placeholder">
                     <h3>Equipment Information</h3>
@@ -328,6 +389,23 @@
                     <h2>Resources & Links</h2>
                     <p>Useful resources, databases, and external links</p>
                 </div>
+                
+                <!-- Student Proposals Section -->
+                <div class="info-card">
+                    <h3>Student Research Proposals</h3>
+                    <p>Click on a student's name to view their research proposal:</p>
+                    
+                    <div class="proposal-buttons">
+                        <button class="proposal-btn" onclick="showProposal('Marina Marquis - final MS thesis proposal - WEC')">Marina Marquis</button>
+                        <button class="proposal-btn" onclick="showProposal('Jackson Barratt Heitmann - final PhD thesis proposal - WEC')">Jackson Barratt Heitmann</button>
+                    </div>
+                    
+                    <div id="proposal-viewer" class="proposal-viewer" style="display: none;">
+                        <button class="close-btn" onclick="closeProposal()">×</button>
+                        <embed id="proposal-image" src="" type="application/pdf" style="width: 100%; height: 90vh; border-radius: 8px;">
+                    </div>
+                </div>
+                
                 <div class="content-placeholder">
                     <h3>Research Resources</h3>
                     <p>Add links to databases, software tools, reference materials, and other useful resources.</p>
@@ -338,7 +416,7 @@
             <section id="publications" class="content-section">
                 <div class="section-header">
                     <h2>Publications</h2>
-                    <p>WE CAN FIND LINKS TO ALL OUR LABS PUBLICATIONS AND PUT THEM HERE. I CAN TRY TO MAKE SUB-SUBTABS PER PERSON?</p>
+                    <p>Lab publications, presentations, and research outputs</p>
                 </div>
                 <div class="content-placeholder">
                     <h3>Research Publications</h3>
@@ -407,6 +485,46 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('[data-tab="overview"]').classList.add('active');
             document.getElementById('overview').classList.add('active');
+        });
+
+        // Proposal viewer functions
+        function showProposal(studentName) {
+            const proposalViewer = document.getElementById('proposal-viewer');
+            const proposalImage = document.getElementById('proposal-image');
+            
+            // Set the PDF source based on student name
+            proposalImage.src = `Previously Finished Proposals/${studentName}.pdf`;
+            
+            // Show the viewer
+            proposalViewer.style.display = 'block';
+            
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProposal() {
+            const proposalViewer = document.getElementById('proposal-viewer');
+            proposalViewer.style.display = 'none';
+            
+            // Re-enable body scrolling
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close proposal viewer when clicking outside the image
+        document.addEventListener('click', function(e) {
+            const proposalViewer = document.getElementById('proposal-viewer');
+            const proposalImage = document.getElementById('proposal-image');
+            
+            if (e.target === proposalViewer) {
+                closeProposal();
+            }
+        });
+
+        // Close proposal viewer with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProposal();
+            }
         });
     </script>
 </body>
