@@ -319,13 +319,19 @@
                     <button class="tab-btn active" data-tab="overview">Overview</button>
                 </li>
                 <li class="nav-tab">
-                    <button class="tab-btn" data-tab="protocols">Protocols</button>
+                    <button class="tab-btn" data-tab="travel">Travel</button>
                 </li>
                 <li class="nav-tab">
                     <button class="tab-btn" data-tab="equipment">Equipment</button>
                 </li>
                 <li class="nav-tab">
                     <button class="tab-btn" data-tab="resources">Resources</button>
+                </li>
+                <li class="nav-tab">
+                    <button class="tab-btn" data-tab="courses">Courses</button>
+                </li>
+                <li class="nav-tab">
+                    <button class="tab-btn" data-tab="thesis-dissertations">Thesis/Dissertations</button>
                 </li>
                 <li class="nav-tab">
                     <button class="tab-btn" data-tab="publications">Publications</button>
@@ -360,15 +366,15 @@
                 </div>
             </section>
 
-            <!-- Protocols Tab -->
-            <section id="protocols" class="content-section">
+            <!-- Travel Tab -->
+            <section id="travel" class="content-section">
                 <div class="section-header">
-                    <h2>Lab Protocols</h2>
-                    <p>Standard operating procedures and experimental protocols</p>
+                    <h2>Travel</h2>
+                    <p>Helpful information on anything travel related for the GERG lab</p>
                 </div>
                 <div class="content-placeholder">
-                    <h3>Protocol Documentation</h3>
-                    <p>Add your lab's standard protocols, procedures, and experimental methods here.</p>
+                    <h3>Travel Documentation</h3>
+                    <p>Add information related to travel (for example travel to get to DeLuca maybe) and then how to get reimbursed for travel expenses?</p>
                 </div>
             </section>
 
@@ -380,7 +386,7 @@
                 </div>
                 <div class="content-placeholder">
                     <h3>Equipment Information</h3>
-                    <p>Document your lab equipment, maintenance schedules, booking systems, and usage instructions.</p>
+                    <p>Here we can document how to use specific lab equipment that is available in the GERG lab. Maybe including a list of available materials and equipment and then some guides on how to use them?</p>
                 </div>
             </section>
 
@@ -421,7 +427,42 @@
                         <button class="proposal-btn" onclick="showPoster('Fussell_et_al_wading bird abundance comparison _FLTWS _ April 2025')">Analise Fussell - TWS 2025 - PDF</button>
                     </div>
                 </div>
-              
+            </section>
+
+            <!-- Courses Tab -->
+            <section id="courses" class="content-section">
+                <div class="section-header">
+                    <h2>Courses</h2>
+                    <p>Helpful information for those who need to take courses in grad school. We can put reccomended classes and other information for them?</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>Course Information</h3>
+                    <p>This section can include information about courses taught by lab members, recommended courses for students, or course materials and syllabi.</p>
+                </div>
+                
+                <div class="content-placeholder">
+                    <h3>Add Course Materials</h3>
+                    <p>Upload syllabi, course schedules, recommended readings, or links to course websites and educational resources.</p>
+                </div>
+            </section>
+
+            <!-- Thesis/Dissertations Tab -->
+            <section id="thesis-dissertations" class="content-section">
+                <div class="section-header">
+                    <h2>Thesis & Dissertations</h2>
+                    <p>Completed theses, dissertations, and student research</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>Student Research Archives</h3>
+                    <p>Access completed thesis and dissertation work from current and former lab members.</p>
+                </div>
+                
+                <div class="content-placeholder">
+                    <h3>Completed Research</h3>
+                    <p>Add links or documents for completed MS theses and PhD dissertations. This could include abstracts, full documents, or links to institutional repositories.</p>
+                </div>
             </section>
 
             <!-- Publications Tab -->
@@ -529,12 +570,12 @@
             document.body.style.overflow = 'hidden';
         }
 
-      // PowerPoint viewer function
+        // PowerPoint viewer function
         function showPosterPPT(posterName) {
             // PowerPoint files can't be displayed inline like PDFs
             // Instead, open in a new tab for download
-           const pptUrl = `Posters/TWS 2025/${posterName}.pptx`;
-           window.open(pptUrl, '_blank');
+            const pptUrl = `Posters/TWS 2025/${posterName}.pptx`;
+            window.open(pptUrl, '_blank');
         }
 
         function closeProposal() {
